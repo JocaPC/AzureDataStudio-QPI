@@ -1,0 +1,255 @@
+{
+    "name": "qpi",
+    "displayName": "Query Performance Insights",
+    "description": "UI for the current version of the QPI library",
+    "version": "0.1.3",
+    "publisher": "jocapc",
+    "engines": {
+        "vscode": "^1.25.0",
+        "azdata": "*"
+    },
+    "categories": [
+        "Other"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jocapc/AzureDataStudio-QPI.git"
+    },
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "qpi.install",
+                "title": "QPI: Install latest QPI scripts"
+            },
+            {
+                "command": "qpi.remove",
+                "title": "QPI: Remove QPI from the current database"
+            },
+            {
+                "command": "qpi.schedule",
+                "title": "QPI: Install a SQL Agent job that will periodically take a snapshot of statistics"
+            }
+        ],
+        "snippets": [],
+        "menus": {
+            "objectExplorer/item/context": []
+        },
+        "dashboard.insights": [
+            {
+                "id": "qpi.sys-info",
+                "contrib": {
+                    "queryFile": "./sql/sys-info.sql",
+                    "type": {
+                        "count": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.memory",
+                "contrib": {
+                    "queryFile": "./sql/memory.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.buffers",
+                "contrib": {
+                    "queryFile": "./sql/buffers.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.volumes",
+                "contrib": {
+                    "queryFile": "./sql/volumes.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.wait-stats",
+                "contrib": {
+                    "queryFile": "./sql/wait-stats.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.file-stats",
+                "contrib": {
+                    "queryFile": "./sql/file-stats.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            }
+        ],
+        "dashboard.tabs": [
+            {
+                "id": "ads-qpi.tab",
+                "title": "QPI",
+                "description": "Query Performance Insights",
+                "container": {
+                    "nav-section": [
+                        {
+                            "id": "nav-qpi-properties",
+                            "title": "Properties",
+                            "icon": {
+                                "light": "./out/src/media/properties.svg",
+                                "dark": "./src/media/properties_inverse.svg"
+                            },
+                            "container": {
+                                "qpi-properties-container": {}
+                            }
+                        },
+                        {
+                            "id": "nav-qpi-statistics",
+                            "title": "Statistics",
+                            "icon": {
+                                "light": "/src/media/statistics.svg",
+                                "dark": "./media/statistics_inverse.svg"
+                            },
+                            "container": {
+                                "qpi-statistics-container": {}
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "dashboard.containers": [
+            {
+                "id": "qpi-properties-container",
+                "container": {
+                    "widgets-container": [
+                        {
+                            "name": "System info",
+                            "gridItemConfig": {
+                                "sizex": 1,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.sys-info": {}
+                            }
+                        },
+                        {
+                            "name": "Volumes",
+                            "gridItemConfig": {
+                                "sizex": 1,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.volumes": {}
+                            }
+                        },
+                        {
+                            "name": "Memory",
+                            "gridItemConfig": {
+                                "sizex": 1,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.memory": {}
+                            }
+                        },
+                        {
+                            "name": "Database memory buffers",
+                            "gridItemConfig": {
+                                "sizex": 2,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.buffers": {}
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "qpi-statistics-container",
+                "container": {
+                    "widgets-container": [
+                        {
+                            "name": "Wait statistics",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.wait-stats": {}
+                            }
+                        },
+                        {
+                            "name": "File IO statistic",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.file-stats": {}
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install && node ./node_modules/azdata/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.10.9",
+        "azdata": "^1.0.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.36"
+    },
+    "dependencies": {
+        "request": "^2.88.0",
+        "request-promise-native": "^1.0.8"
+    }
+}

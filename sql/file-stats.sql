@@ -1,0 +1,1 @@
+select * from qpi.file_stats; 
