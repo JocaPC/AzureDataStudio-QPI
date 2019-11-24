@@ -1,0 +1,66 @@
+
+{
+    "QPI running queries": {
+        "prefix": "qpi:CurrentlyRunningQueries",
+        "body": [
+            "SELECT * FROM qpi.queries;"
+        ],
+        "description": "Return all queries that are in progress."
+    },
+    "QPI blocked queries": {
+        "prefix": "qpi:BlockedQueries",
+        "body": [
+            "SELECT * FROM qpi.blocked_queries;"
+        ],
+        "description": "Return all currently blocked queries"
+    },
+    "QPI query locks": {
+        "prefix": "qpi:QueryLocks",
+        "body": [
+            "SELECT * FROM qpi.query_locks",
+            "-- WHERE text = '' --> Filter using query text"
+        ],
+        "description": "Return all locks that the current queries are holding"
+    },
+    "QPI backupe/restore requests": {
+        "prefix": "qpi:BackupRestoreRequests",
+        "body": [
+            "SELECT * FROM qpi.bre"
+        ],
+        "description": "Return currently active backup/restore requests"
+    },
+    "QPI snapshot statistics": {
+        "prefix": "qpi:Snapshot",
+        "body": [
+            "exec qpi.snapshot_perf_counters;",
+            "exec qpi.snapshot_wait_stats;",
+            "exec qpi.snapshot_file_stats;"
+        ],
+        "description": "Take a snapshot of statistics"
+    },
+    "QPI execution statistics": {
+        "prefix": "qpi:ExecutionStatistics",
+        "body": [
+            "select start_time,",
+            "[type] = execution_type_desc,",
+            "[queries/s] =  sum(count_executions)/ min(interval_mi) /60,",
+            "[cpu %] = ROUND(100. * (sum(count_executions*cpu_time_ms) /1000.)",
+            "            / ( min(interval_mi) * 60)",
+            "            /  (SELECT top 1 cpu_count FROM qpi.sys_info)/*cores*/,1)",
+        "from qpi.db_query_plan_exec_stats_history",
+        "group by start_time, execution_type_desc",
+        "order by start_time desc"
+        ],
+        "description": "Get the historical query execution statistics"
+    },
+    "QPI Queries waiting on category": {
+        "prefix": "qpi:QueriesWaitingPerCategory",
+        "body": [
+            "-- Insert wait category in the parameter:",
+            "select top 100 * from qpi.db_query_wait_stats_history",
+            "where category = <wait_category,,>",
+            "order by wait_time_ms desc"
+        ],
+        "description": "Find the queries that are waiting on some wait category (put the category in the query)"
+    }
+}

@@ -2,7 +2,7 @@
     "name": "qpi",
     "displayName": "Query Performance Insights",
     "description": "UI for the current version of the QPI library",
-    "version": "0.1.3",
+    "version": "0.1.0",
     "publisher": "jocapc",
     "engines": {
         "vscode": "^1.25.0",
@@ -18,7 +18,7 @@
     "activationEvents": [
         "*"
     ],
-    "main": "./out/src/extension",
+    "main": "./out/extension",
     "contributes": {
         "commands": [
             {
@@ -34,7 +34,12 @@
                 "title": "QPI: Install a SQL Agent job that will periodically take a snapshot of statistics"
             }
         ],
-        "snippets": [],
+        "snippets": [
+            {
+                "language": "sql",
+                "path": "./snippets/snippets.json"
+            }
+        ],
         "menus": {
             "objectExplorer/item/context": []
         },
