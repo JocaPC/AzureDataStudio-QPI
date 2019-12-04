@@ -5,14 +5,14 @@
         "body": [
             "SELECT * FROM qpi.queries;"
         ],
-        "description": "Return all queries that are in progress."
+        "description": "Return all queries that are currently in progress."
     },
     "QPI blocked queries": {
         "prefix": "qpi:BlockedQueries",
         "body": [
             "SELECT * FROM qpi.blocked_queries;"
         ],
-        "description": "Return all currently blocked queries"
+        "description": "Return all queryies that are currently blocked."
     },
     "QPI query locks": {
         "prefix": "qpi:QueryLocks",
@@ -22,12 +22,125 @@
         ],
         "description": "Return all locks that the current queries are holding"
     },
-    "QPI backupe/restore requests": {
+    "QPI backup/restore requests": {
         "prefix": "qpi:BackupRestoreRequests",
         "body": [
             "SELECT * FROM qpi.bre"
         ],
         "description": "Return currently active backup/restore requests"
+    },
+    "QPI CPU usage": {
+        "prefix": "qpi:CPU",
+        "body": [
+            "SELECT * FROM qpi.cpu_usage"
+        ],
+        "description": "Return CPU usage"
+    },
+    "QPI memory usage": {
+        "prefix": "qpi:memory",
+        "body": [
+            "SELECT * FROM qpi.memory"
+        ],
+        "description": "Return distribution of memory usage on the instance"
+    },
+    "QPI memory buffers": {
+        "prefix": "qpi:Memory buffers per db",
+        "body": [
+            "SELECT * FROM qpi.memory_buffers"
+        ],
+        "description": "Return buffer usage per database"
+    },
+    "QPI query statistics": {
+        "prefix": "qpi:Query statistics(recent)",
+        "body": [
+            "SELECT * FROM qpi.db_query_exec_stats",
+            "-- WHERE [text] = '';",
+            "-- WHERE query_id = '';"
+        ],
+        "description": "Return query statistics from the latest Query Store interval."
+    },
+    "QPI query statistics(all)": {
+        "prefix": "qpi:Query statistics(all)",
+        "body": [
+            "SELECT * FROM qpi.db_query_exec_stats_history",
+            "-- WHERE [text] = '';",
+            "-- WHERE query_id = '';"
+        ],
+        "description": "Return query statistics from the entire Query Store history."
+    },
+    "QPI query wait statistics": {
+        "prefix": "qpi:Query wait statistics(recent)",
+        "body": [
+            "SELECT * FROM qpi.db_query_wait_stats",
+            "-- WHERE [text] = '';",
+            "-- WHERE [category] = '';",
+            "-- WHERE query_id = '';"
+        ],
+        "description": "Return query statistics from the latest Query Store interval."
+    },
+    "QPI query wait statistics(all)": {
+        "prefix": "qpi:Query wait statistics(all)",
+        "body": [
+            "SELECT * FROM qpi.db_query_wait_stats_history",
+            "-- WHERE [text] = '';",
+            "-- WHERE [category] = '';",
+            "-- WHERE query_id = '';"
+        ],
+        "description": "Return query statistics from the entire Query Store history."
+    },
+    "QPI query plan statistics": {
+        "prefix": "qpi:Query plan statistics(recent)",
+        "body": [
+            "SELECT * FROM qpi.db_query_plan_exec_stats",
+            "-- WHERE [text] = '';",
+            "-- WHERE query_id = '';",
+            "-- WHERE plan_id = '';"
+        ],
+        "description": "Return query plan statistics from the latest Query Store interval."
+    },
+    "QPI query plan statistics (all)": {
+        "prefix": "qpi:Query plan statistics(all)",
+        "body": [
+            "SELECT * FROM qpi.db_query_plan_exec_stats_history",
+            "-- WHERE [text] = '';",
+            "-- WHERE query_id = ;",
+            "-- WHERE plan_id = ;"
+        ],
+        "description": "Return query plan wait statistics from the entire Query Store history."
+    },
+    "QPI query plan stats as of time": {
+        "prefix": "qpi:Query plan stats as of",
+        "body": [
+            "SELECT * FROM db_query_exec_stats_as_of(",
+                    "qpi.ago(0/*d*/,2/*h*/,0/*m*/),",
+                ")",
+            "-- WHERE query_id = ;",
+            "-- WHERE plan_id = ;"
+        ],
+        "description": "Return query plan wait statistics from the entire Query Store history."
+    },
+    "QPI query plan compare": {
+        "prefix": "qpi:Query plan compare stats",
+        "body": [
+            "SELECT * FROM db_query_plan_exec_stats_diff(",
+                    "qpi.ago(0/*d*/,2/*h*/,0/*m*/),",
+                    "GETDATE()",
+                ")",
+            "-- WHERE query_id = ;",
+            "-- WHERE plan_id = ;"
+        ],
+        "description": "Return query plan wait statistics from the entire Query Store history."
+    },
+    "QPI query plan wait statistics": {
+        "prefix": "qpi:Query plan wait statistics(recent)",
+        "body": [
+            "SELECT * FROM qpi.db_query_plan_wait_stats",
+            "-- WHERE [text] = '';",
+            "-- WHERE [category] = '';",
+            "-- WHERE query_id = ;",
+            "-- WHERE plan_id = ;"
+        ],
+        "description": "Return query plan wait statistics from the latest Query Store interval."
     },
     "QPI snapshot statistics": {
         "prefix": "qpi:Snapshot",

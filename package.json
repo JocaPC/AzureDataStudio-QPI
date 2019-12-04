@@ -1,8 +1,8 @@
 {
     "name": "qpi",
     "displayName": "Query Performance Insights",
-    "description": "UI for the current version of the QPI library",
-    "version": "0.1.0",
+    "description": "Performance monitoring and troubleshooting using QPI library",
+    "version": "0.1.1",
     "publisher": "jocapc",
     "engines": {
         "vscode": "^1.25.0",
@@ -18,7 +18,7 @@
     "activationEvents": [
         "*"
     ],
-    "main": "./out/extension",
+    "main": "./out",
     "contributes": {
         "commands": [
             {
@@ -115,9 +115,79 @@
                 }
             },
             {
+                "id": "qpi.wait-stats-categories",
+                "contrib": {
+                    "queryFile": "./sql/wait-stats-categories.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
                 "id": "qpi.file-stats",
                 "contrib": {
                     "queryFile": "./sql/file-stats.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.queries-top-cpu",
+                "contrib": {
+                    "queryFile": "./sql/queries-top-cpu.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.queries-top-duration",
+                "contrib": {
+                    "queryFile": "./sql/queries-top-duration.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.queries-top-storage",
+                "contrib": {
+                    "queryFile": "./sql/queries-top-storage.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.queries-top-tempdb",
+                "contrib": {
+                    "queryFile": "./sql/queries-top-tempdb.sql",
                     "type": {
                         "table": {
                             "dataDirection": "horizontal",
@@ -156,6 +226,17 @@
                             },
                             "container": {
                                 "qpi-statistics-container": {}
+                            }
+                        },
+                        {
+                            "id": "nav-qpi-query-statistics",
+                            "title": "Query statistics",
+                            "icon": {
+                                "light": "/src/media/statistics.svg",
+                                "dark": "./media/statistics_inverse.svg"
+                            },
+                            "container": {
+                                "qpi-query-statistics-container": {}
                             }
                         }
                     ]
@@ -217,11 +298,21 @@
                         {
                             "name": "Wait statistics",
                             "gridItemConfig": {
-                                "sizex": 4,
+                                "sizex": 2,
                                 "sizey": 1
                             },
                             "widget": {
                                 "qpi.wait-stats": {}
+                            }
+                        },
+                        {
+                            "name": "Wait categories",
+                            "gridItemConfig": {
+                                "sizex": 2,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.wait-stats-categories": {}
                             }
                         },
                         {
@@ -232,6 +323,53 @@
                             },
                             "widget": {
                                 "qpi.file-stats": {}
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "qpi-query-statistics-container",
+                "container": {
+                    "widgets-container": [
+                        {
+                            "name": "Top CPU consumers",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.queries-top-cpu": {}
+                            }
+                        },
+                        {
+                            "name": "Slowest queries",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.queries-top-duration": {}
+                            }
+                        },
+                        {
+                            "name": "Top storage consumers",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.queries-top-storage": {}
+                            }
+                        },
+                        {
+                            "name": "Top TempDB consumers",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.queries-top-tempdb": {}
                             }
                         }
                     ]
