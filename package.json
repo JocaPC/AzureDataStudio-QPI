@@ -2,7 +2,7 @@
     "name": "qpi",
     "displayName": "Query Performance Insights",
     "description": "Performance monitoring and troubleshooting using QPI library",
-    "version": "0.1.1",
+    "version": "0.1.0",
     "publisher": "jocapc",
     "engines": {
         "vscode": "^1.25.0",
@@ -101,9 +101,9 @@
                 }
             },
             {
-                "id": "qpi.wait-stats",
+                "id": "qpi.wait-stats-categories",
                 "contrib": {
-                    "queryFile": "./sql/wait-stats.sql",
+                    "queryFile": "./sql/wait-stats-categories.sql",
                     "type": {
                         "table": {
                             "dataDirection": "horizontal",
@@ -115,9 +115,9 @@
                 }
             },
             {
-                "id": "qpi.wait-stats-categories",
+                "id": "qpi.wait-stats",
                 "contrib": {
-                    "queryFile": "./sql/wait-stats-categories.sql",
+                    "queryFile": "./sql/wait-stats.sql",
                     "type": {
                         "table": {
                             "dataDirection": "horizontal",
@@ -197,6 +197,62 @@
                         }
                     }
                 }
+            },
+            {
+                "id": "qpi.queries-waiting-cpu",
+                "contrib": {
+                    "queryFile": "./sql/queries-top-waiting-cpu.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.queries-waiting-memory",
+                "contrib": {
+                    "queryFile": "./sql/queries-waiting-memory.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.queries-waiting-io",
+                "contrib": {
+                    "queryFile": "./sql/queries-waiting-io.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.execution-statistics",
+                "contrib": {
+                    "queryFile": "./sql/execution-stats.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
             }
         ],
         "dashboard.tabs": [
@@ -210,7 +266,7 @@
                             "id": "nav-qpi-properties",
                             "title": "Properties",
                             "icon": {
-                                "light": "./out/src/media/properties.svg",
+                                "light": "./src/media/properties.svg",
                                 "dark": "./src/media/properties_inverse.svg"
                             },
                             "container": {
@@ -219,21 +275,32 @@
                         },
                         {
                             "id": "nav-qpi-statistics",
-                            "title": "Statistics",
+                            "title": "File IO",
                             "icon": {
-                                "light": "/src/media/statistics.svg",
-                                "dark": "./media/statistics_inverse.svg"
+                                "light": "./src/media/properties.svg",
+                                "dark": "./src/media/properties_inverse.svg"
                             },
                             "container": {
                                 "qpi-statistics-container": {}
                             }
                         },
                         {
+                            "id": "nav-qpi-memory",
+                            "title": "Memory",
+                            "icon": {
+                                "light": "./src/media/properties.svg",
+                                "dark": "./src/media/properties_inverse.svg"
+                            },
+                            "container": {
+                                "qpi-memory-container": {}
+                            }
+                        },
+                        {
                             "id": "nav-qpi-query-statistics",
                             "title": "Query statistics",
                             "icon": {
-                                "light": "/src/media/statistics.svg",
-                                "dark": "./media/statistics_inverse.svg"
+                                "light": "./src/media/properties.svg",
+                                "dark": "./src/media/properties_inverse.svg"
                             },
                             "container": {
                                 "qpi-query-statistics-container": {}
@@ -269,6 +336,53 @@
                             }
                         },
                         {
+                            "name": "Database workload statistics",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.execution-statistics": {}
+                            }
+                        },
+                        {
+                            "name": "File IO statistic",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.file-stats": {}
+                            }
+                        },
+                        {
+                            "name": "Wait statistics",
+                            "gridItemConfig": {
+                                "sizex": 2,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.wait-stats": {}
+                            }
+                        },
+                        {
+                            "name": "Wait categories",
+                            "gridItemConfig": {
+                                "sizex": 1,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.wait-stats-categories": {}
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "qpi-memory-container",
+                "container": {
+                    "widgets-container": [
+                        {
                             "name": "Memory",
                             "gridItemConfig": {
                                 "sizex": 1,
@@ -287,6 +401,16 @@
                             "widget": {
                                 "qpi.buffers": {}
                             }
+                        },
+                        {
+                            "name": "Queries waiting for memory",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.queries-waiting-memory": {}
+                            }
                         }
                     ]
                 }
@@ -296,26 +420,6 @@
                 "container": {
                     "widgets-container": [
                         {
-                            "name": "Wait statistics",
-                            "gridItemConfig": {
-                                "sizex": 2,
-                                "sizey": 1
-                            },
-                            "widget": {
-                                "qpi.wait-stats": {}
-                            }
-                        },
-                        {
-                            "name": "Wait categories",
-                            "gridItemConfig": {
-                                "sizex": 2,
-                                "sizey": 1
-                            },
-                            "widget": {
-                                "qpi.wait-stats-categories": {}
-                            }
-                        },
-                        {
                             "name": "File IO statistic",
                             "gridItemConfig": {
                                 "sizex": 4,
@@ -323,6 +427,26 @@
                             },
                             "widget": {
                                 "qpi.file-stats": {}
+                            }
+                        },
+                        {
+                            "name": "Top storage consumers",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.queries-top-storage": {}
+                            }
+                        },
+                        {
+                            "name": "Queries waiting on IO",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.queries-waiting-io": {}
                             }
                         }
                     ]
