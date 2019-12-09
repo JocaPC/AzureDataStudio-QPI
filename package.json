@@ -63,11 +63,13 @@
                 "contrib": {
                     "queryFile": "./sql/memory.sql",
                     "type": {
-                        "table": {
-                            "dataDirection": "horizontal",
-                            "columnsAsLabels": false,
-                            "labelFirstColumn": false,
-                            "legendPosition": "top"
+                        "doughnut": {
+                            "dataDirection":"vertical",
+                            "columnsAsLabels":true,
+                            "labelFirstColumn":true,
+                            "legendPosition":"top",
+                            "encoding":"hex",
+                            "imageFormat":"jpeg"
                         }
                     }
                 }
@@ -91,11 +93,11 @@
                 "contrib": {
                     "queryFile": "./sql/volumes.sql",
                     "type": {
-                        "table": {
-                            "dataDirection": "horizontal",
-                            "columnsAsLabels": false,
-                            "labelFirstColumn": false,
-                            "legendPosition": "top"
+                        "horizontalBar": {
+                            "dataDirection":"vertical",
+                            "columnsAsLabels":true,
+                            "labelFirstColumn":true,
+                            "legendPosition":"top"
                         }
                     }
                 }
@@ -105,11 +107,13 @@
                 "contrib": {
                     "queryFile": "./sql/wait-stats-categories.sql",
                     "type": {
-                        "table": {
-                            "dataDirection": "horizontal",
-                            "columnsAsLabels": false,
-                            "labelFirstColumn": false,
-                            "legendPosition": "top"
+                        "doughnut": {
+                            "dataDirection":"vertical",
+                            "columnsAsLabels":true,
+                            "labelFirstColumn":true,
+                            "legendPosition":"none",
+                            "encoding":"hex",
+                            "imageFormat":"jpeg"
                         }
                     }
                 }
@@ -124,6 +128,22 @@
                             "columnsAsLabels": false,
                             "labelFirstColumn": false,
                             "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.wait-stats-per-task",
+                "contrib": {
+                    "queryFile": "./sql/wait-stats-per-task.sql",
+                    "type": {
+                        "doughnut": {
+                            "dataDirection":"vertical",
+                            "columnsAsLabels":true,
+                            "labelFirstColumn":true,
+                            "legendPosition":"none",
+                            "encoding":"hex",
+                            "imageFormat":"jpeg"
                         }
                     }
                 }
@@ -328,7 +348,7 @@
                         {
                             "name": "Volumes",
                             "gridItemConfig": {
-                                "sizex": 1,
+                                "sizex": 2,
                                 "sizey": 1
                             },
                             "widget": {
@@ -336,9 +356,19 @@
                             }
                         },
                         {
+                            "name": "Wait categories",
+                            "gridItemConfig": {
+                                "sizex": 1,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.wait-stats-categories": {}
+                            }
+                        },
+                        {
                             "name": "Database workload statistics",
                             "gridItemConfig": {
-                                "sizex": 4,
+                                "sizex": 2,
                                 "sizey": 1
                             },
                             "widget": {
@@ -358,21 +388,11 @@
                         {
                             "name": "Wait statistics",
                             "gridItemConfig": {
-                                "sizex": 2,
+                                "sizex": 3,
                                 "sizey": 1
                             },
                             "widget": {
                                 "qpi.wait-stats": {}
-                            }
-                        },
-                        {
-                            "name": "Wait categories",
-                            "gridItemConfig": {
-                                "sizex": 1,
-                                "sizey": 1
-                            },
-                            "widget": {
-                                "qpi.wait-stats-categories": {}
                             }
                         }
                     ]
@@ -393,7 +413,7 @@
                             }
                         },
                         {
-                            "name": "Database memory buffers",
+                            "name": "Memory buffers",
                             "gridItemConfig": {
                                 "sizex": 2,
                                 "sizey": 1
@@ -456,6 +476,26 @@
                 "id": "qpi-query-statistics-container",
                 "container": {
                     "widgets-container": [
+                        {
+                            "name": "Database workload statistics",
+                            "gridItemConfig": {
+                                "sizex": 2,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.execution-statistics": {}
+                            }
+                        },
+                        {
+                            "name": "Waits per task",
+                            "gridItemConfig": {
+                                "sizex": 1,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.wait-stats-per-task": {}
+                            }
+                        },
                         {
                             "name": "Top CPU consumers",
                             "gridItemConfig": {
