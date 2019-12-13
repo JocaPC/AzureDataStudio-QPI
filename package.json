@@ -2,7 +2,7 @@
     "name": "qpi",
     "displayName": "Query Performance Insights",
     "description": "Performance monitoring and troubleshooting using QPI library",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "publisher": "jocapc",
     "engines": {
         "vscode": "^1.25.0",
@@ -297,8 +297,8 @@
                             "id": "nav-qpi-statistics",
                             "title": "File IO",
                             "icon": {
-                                "light": "./src/media/files.svg",
-                                "dark": "./src/media/files_inverse.svg"
+                                "light": "./src/media/disk.svg",
+                                "dark": "./src/media/disk_inverse.svg"
                             },
                             "container": {
                                 "qpi-statistics-container": {}
@@ -308,8 +308,8 @@
                             "id": "nav-qpi-memory",
                             "title": "Memory",
                             "icon": {
-                                "light": "./src/media/idea.svg",
-                                "dark": "./src/media/idea_inverse.svg"
+                                "light": "./src/media/memory.svg",
+                                "dark": "./src/media/memory_inverse.svg"
                             },
                             "container": {
                                 "qpi-memory-container": {}

@@ -149,13 +149,34 @@
         "description": "Return query plan wait statistics from the latest Query Store interval."
     },
     "QPI snapshot statistics": {
-        "prefix": "qpi:take a stat snapshot",
+        "prefix": "qpi:snapshot statistics",
         "body": [
             "exec qpi.snapshot_perf_counters;",
             "exec qpi.snapshot_wait_stats;",
             "exec qpi.snapshot_file_stats;"
         ],
         "description": "take a snapshot of statistics"
+    },
+    "QPI file statistics": {
+        "prefix": "qpi:file statistics",
+        "body": [
+            "SELECT * FROM qpi.file_stats"
+        ],
+        "description": "get file IO statistics"
+    },
+    "QPI db file statistics": {
+        "prefix": "qpi:db file statistics",
+        "body": [
+            "SELECT * FROM qpi.db_file_stats"
+        ],
+        "description": "get database scoped file IO statistics"
+    },
+    "QPI wait statistics": {
+        "prefix": "qpi:wait statistics",
+        "body": [
+            "SELECT * FROM qpi.wait_stats"
+        ],
+        "description": "get wait statistics"
     },
     "QPI execution statistics": {
         "prefix": "qpi:execution statistics",
