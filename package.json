@@ -2,7 +2,7 @@
     "name": "qpi",
     "displayName": "Query Performance Insights",
     "description": "Performance monitoring and troubleshooting using QPI library",
-    "version": "0.1.1",
+    "version": "0.1.4",
     "publisher": "jocapc",
     "engines": {
         "vscode": "^1.25.0",
@@ -18,7 +18,7 @@
     "activationEvents": [
         "*"
     ],
-    "main": "./out",
+    "main": "./out/extension",
     "contributes": {
         "commands": [
             {
@@ -41,7 +41,23 @@
             }
         ],
         "menus": {
-            "objectExplorer/item/context": []
+            "objectExplorer/item/context": [
+                {
+                    "command": "qpi.install",
+                    "when": "connectionProvider == MSSQL && nodeType && nodeType == Database",
+                    "group": "QPI"
+                },
+                {
+                    "command": "qpi.remove",
+                    "when": "connectionProvider == MSSQL && nodeType && nodeType == Database",
+                    "group": "QPI"
+                },
+                {
+                    "command": "qpi.schedule",
+                    "when": "connectionProvider == MSSQL && nodeType && nodeType == Server",
+                    "group": "QPI"
+                }
+            ]
         },
         "dashboard.insights": [
             {
@@ -158,6 +174,40 @@
                             "columnsAsLabels": false,
                             "labelFirstColumn": false,
                             "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.db-log-file-stats-history",
+                "contrib": {
+                    "queryFile": "./sql/db-log-file-stats-history.sql",
+                    "type": {
+                        "line": {
+                          "dataDirection": "vertical",
+                          "columnsAsLabels": true,
+                          "labelFirstColumn": true,
+                          "legendPosition": "top",
+                          "xAxisLabel": "Time",
+                          "yAxisLabel": "",
+                          "dataType": "number"
+                        }
+                    }
+                }
+            },
+            {
+                "id": "qpi.db-data-file-stats-history",
+                "contrib": {
+                    "queryFile": "./sql/db-data-file-stats-history.sql",
+                    "type": {
+                        "line": {
+                          "dataDirection": "vertical",
+                          "columnsAsLabels": true,
+                          "labelFirstColumn": true,
+                          "legendPosition": "top",
+                          "xAxisLabel": "Time",
+                          "yAxisLabel": "",
+                          "dataType": "number"
                         }
                     }
                 }
@@ -447,6 +497,26 @@
                             },
                             "widget": {
                                 "qpi.file-stats": {}
+                            }
+                        },
+                        {
+                            "name": "Database Log IO statistic",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.db-log-file-stats-history": {}
+                            }
+                        },
+                        {
+                            "name": "Database Data IO statistic",
+                            "gridItemConfig": {
+                                "sizex": 4,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.db-data-file-stats-history": {}
                             }
                         },
                         {

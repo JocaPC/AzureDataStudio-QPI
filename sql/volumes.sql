@@ -1,1 +1,1 @@
-select volume_mount_point, used_gb, available_gb from qpi.volumes;
+select [root] = volume_mount_point, [Used(GB)] = used_gb, [Available(GB)] = available_gb from qpi.volumes;
