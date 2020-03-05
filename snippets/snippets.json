@@ -1,7 +1,8 @@
 {
     "QPI running queries": {
-        "prefix": "qpi:currently running queries",
+        "prefix": "qpi:queries (active)",
         "body": [
+            "-- currently active queries:",
             "SELECT * FROM qpi.queries;"
         ],
         "description": "Return all queries that are currently in progress."
@@ -9,6 +10,7 @@
     "QPI blocked queries": {
         "prefix": "qpi:blocked queries",
         "body": [
+            "-- Currently blocked active queries:",
             "SELECT * FROM qpi.blocked_queries;"
         ],
         "description": "Return all queryies that are currently blocked."
@@ -16,84 +18,93 @@
     "QPI query locks": {
         "prefix": "qpi:locks",
         "body": [
+            "-- Locks held by currently running queries:",
             "SELECT * FROM qpi.query_locks",
-            "-- WHERE text = '' --> Filter using query text"
+            "-- WHERE text = '' --> Filter using query text",
+            ";"
         ],
         "description": "Return all locks that the current queries are holding"
     },
     "QPI backup/restore requests": {
         "prefix": "qpi:backup/restore requests",
         "body": [
-            "SELECT * FROM qpi.bre"
+            "-- Active backup/restore requests:",
+            "SELECT * FROM qpi.bre;"
         ],
         "description": "Return currently active backup/restore requests"
     },
     "QPI CPU usage": {
         "prefix": "qpi:CPU usage",
         "body": [
-            "SELECT * FROM qpi.cpu_usage"
+            "-- CPU usage (historical)",
+            "SELECT * FROM qpi.cpu_usage;"
         ],
         "description": "Return CPU usage"
     },
     "QPI memory usage": {
-        "prefix": "qpi:memory usage",
+        "prefix": "qpi:mem usage",
         "body": [
-            "SELECT * FROM qpi.memory"
+            "-- Memory usage",
+            "SELECT * FROM qpi.memory;"
         ],
         "description": "Return distribution of memory usage on the instance"
     },
     "QPI memory buffers": {
-        "prefix": "qpi:memory buffers per db",
+        "prefix": "qpi:mem buffers/db",
         "body": [
-            "SELECT * FROM qpi.memory_buffers"
+            "-- Size of memory buffer pools per each database",
+            "SELECT * FROM qpi.memory_buffers",
+            "ORDER BY buffer_percent DESC;"
         ],
         "description": "Return buffer usage per database"
     },
     "QPI query statistics": {
-        "prefix": "qpi:query statistics",
+        "prefix": "qpi:query stats",
         "body": [
             "SELECT * FROM qpi.db_query_exec_stats",
             "-- WHERE [text] = ''",
             "-- WHERE query_id = ",
-            "ORDER BY cpu_time_ms DESC --> or duration_s"
+            "ORDER BY cpu_time_ms DESC; --> or duration_s;"
         ],
         "description": "Return query statistics from the latest Query Store interval."
     },
     "QPI query statistics(all)": {
-        "prefix": "qpi:query statistics(all)",
+        "prefix": "qpi:query stats(all)",
         "body": [
             "SELECT * FROM qpi.db_query_exec_stats_history",
             "-- WHERE [text] = ''",
             "-- WHERE query_id = ",
-            "ORDER BY cpu_time_ms DESC --> or duration_s"
+            "ORDER BY cpu_time_ms DESC; --> or duration_s;"
         ],
         "description": "Return query statistics from the entire Query Store history."
     },
     "QPI query wait statistics": {
-        "prefix": "qpi:query wait statistics",
+        "prefix": "qpi:query wait stats",
         "body": [
             "SELECT * FROM qpi.db_query_wait_stats",
             "-- WHERE [text] = ''",
             "-- WHERE [category] = '' --> Buffer IO,CPU,Tran Log IO,Memory,Network IO,Parallelism,Preemptive,Idle",
             "-- WHERE query_id = ''",
-            "ORDER BY duration_s DESC;"
+            "ORDER BY wait_time_ms DESC;"
         ],
         "description": "Return query statistics from the latest Query Store interval."
     },
     "QPI query wait statistics(all)": {
-        "prefix": "qpi:query wait statistics(all)",
+        "prefix": "qpi:query wait stats(all)",
         "body": [
+            "-- Waits statistics for all recorded queries:",
             "SELECT * FROM qpi.db_query_wait_stats_history",
             "-- WHERE [text] = ''",
             "-- WHERE [category] = '' --> Buffer IO,CPU,Tran Log IO,Memory,Network IO,Parallelism,Preemptive,Idle",
             "-- WHERE query_id = ''",
-            "ORDER BY duration_s DESC;"
+            "ORDER BY wait_time_ms DESC;"
         ],
         "description": "Return query statistics from the entire Query Store history."
     },
     "QPI query plan statistics": {
-        "prefix": "qpi:plan statistics",
+        "prefix": "qpi:plan stats",
         "body": [
+            "-- Execution statistics for the plans executed in the latest query store interval",
             "SELECT * FROM qpi.db_query_plan_exec_stats",
             "-- WHERE [text] = ''",
             "-- WHERE query_id = ''",
@@ -103,8 +114,9 @@
         "description": "Return query plan statistics from the latest Query Store interval."
     },
     "QPI query plan statistics (all)": {
-        "prefix": "qpi:plan statistics(all)",
+        "prefix": "qpi:plan stats(all)",
         "body": [
+            "-- Execution statistics for all recorded query plans:",
             "SELECT TOP 20 * FROM qpi.db_query_plan_exec_stats_history",
             "-- WHERE [text] = ''",
             "-- WHERE query_id = ",
@@ -114,73 +126,84 @@
         "description": "Return query plan wait statistics from the entire Query Store history."
     },
     "QPI query plan stats as of time": {
-        "prefix": "qpi:plan statistics as of <time>",
+        "prefix": "qpi:plan stats as of <time>",
         "body": [
-            "SELECT * FROM db_query_exec_stats_as_of(",
-                    "qpi.ago(0/*d*/,2/*h*/,0/*m*/),",
-                ")",
+            "-- Execution statistics for query plans at specified time in history:",
+            "SELECT * FROM qpi.db_query_exec_stats_as_of(",
+            "                         qpi.ago(0/*d*/,2/*h*/,0/*m*/)",
+            "                  )",
             "-- WHERE query_id = ",
-            "-- WHERE plan_id = "
+            "-- WHERE plan_id = ",
+            ";"
         ],
         "description": "Return query plan statistics at the specified time in the past."
     },
     "QPI query plan compare": {
-        "prefix": "qpi:compare plan statistics",
+        "prefix": "qpi:compare plan stats",
         "body": [
-            "SELECT * FROM db_query_plan_exec_stats_diff(",
+            "-- Differences in query plans executed in the specified intervals:",
+            "SELECT * FROM qpi.db_query_plan_exec_stats_diff(",
                     "qpi.ago(0/*d*/,2/*h*/,0/*m*/),",
                     "GETDATE()",
                 ")",
             "-- WHERE query_id = ",
-            "-- WHERE plan_id = "
+            "-- WHERE plan_id = ",
+            ";"
         ],
         "description": "Return query plan wait statistics from the entire Query Store history."
     },
     "QPI query plan wait statistics": {
-        "prefix": "qpi:plan wait statistics",
+        "prefix": "qpi:plan wait stats",
         "body": [
+            "-- Wait statistics for the queries executed in the latest query store interval:",
             "SELECT * FROM qpi.db_query_plan_wait_stats",
             "-- WHERE [text] = ''",
             "-- WHERE [category] = '' --> Buffer IO,CPU,Tran Log IO,Memory,Network IO,Parallelism,Preemptive,Idle",
             "-- WHERE query_id = ",
             "-- WHERE plan_id = ",
-            "ORDER BY wait_time_ms DESC"
+            "ORDER BY wait_time_ms DESC;"
         ],
         "description": "Return query plan wait statistics from the latest Query Store interval."
     },
     "QPI snapshot statistics": {
-        "prefix": "qpi:snapshot statistics",
+        "prefix": "qpi:snapshot stats",
         "body": [
+            "-- Take the snapshot (baseline) of the following statistics:",
             "exec qpi.snapshot_perf_counters;",
             "exec qpi.snapshot_wait_stats;",
             "exec qpi.snapshot_file_stats;"
         ],
-        "description": "take a snapshot of statistics"
+        "description": "Take a snapshot of statistics"
     },
     "QPI file statistics": {
-        "prefix": "qpi:file statistics",
+        "prefix": "qpi:file stats",
         "body": [
-            "SELECT * FROM qpi.file_stats"
+            "-- Returns IO statistics for all database files:",
+            "SELECT * FROM qpi.file_stats;"
         ],
         "description": "get file IO statistics"
     },
     "QPI db file statistics": {
-        "prefix": "qpi:db file statistics",
+        "prefix": "qpi:db file stats",
         "body": [
-            "SELECT * FROM qpi.db_file_stats"
+            "-- Returns IO statistics for current database files:",
+            "SELECT * FROM qpi.db_file_stats;"
         ],
-        "description": "get database scoped file IO statistics"
+        "description": "Returns database-scoped file IO statistics"
     },
     "QPI wait statistics": {
-        "prefix": "qpi:wait statistics",
+        "prefix": "qpi:wait stats",
         "body": [
-            "SELECT * FROM qpi.wait_stats"
+            "-- Instance-level wait statistics:",
+            "SELECT * FROM qpi.wait_stats",
+            "ORDER BY wait_per_task_ms DESC;"
         ],
         "description": "get wait statistics"
     },
     "QPI execution statistics": {
-        "prefix": "qpi:execution statistics",
+        "prefix": "qpi:exec stats",
         "body": [
+            "-- Database-level query execution statistics:",
             "select start_time,",
             "[type] = execution_type_desc,",
             "[queries/s] =  sum(count_executions)/ min(interval_mi) /60,",
@@ -189,14 +212,14 @@
             "            /  (SELECT top 1 cpu_count FROM qpi.sys_info)/*cores*/,1)",
         "from qpi.db_query_plan_exec_stats_history",
         "group by start_time, execution_type_desc",
-        "order by start_time desc"
+        "order by start_time desc;"
         ],
         "description": "Get the historical query execution statistics"
     },
     "QPI Queries waiting on category": {
-        "prefix": "qpi:queries waiting per category",
+        "prefix": "qpi:queries waiting/category",
         "body": [
-            "-- Insert wait category in the where predicate:",
+            "-- Queries waiting on category (nsert wait category in the where predicate):",
             "select top 100 * from qpi.db_query_wait_stats_history",
             "where category = '' --> Buffer IO,CPU,Tran Log IO,Memory,Network IO,Parallelism,Preemptive,Idle",
             "order by wait_time_ms desc"
