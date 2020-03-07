@@ -2,7 +2,7 @@
     "name": "qpi",
     "displayName": "Query Performance Insights",
     "description": "Performance monitoring and troubleshooting using QPI library",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "publisher": "jocapc",
     "engines": {
         "vscode": "^1.25.0",
@@ -80,12 +80,12 @@
                     "queryFile": "./sql/memory.sql",
                     "type": {
                         "doughnut": {
-                            "dataDirection":"vertical",
-                            "columnsAsLabels":true,
-                            "labelFirstColumn":true,
-                            "legendPosition":"top",
-                            "encoding":"hex",
-                            "imageFormat":"jpeg"
+                            "dataDirection": "vertical",
+                            "columnsAsLabels": true,
+                            "labelFirstColumn": true,
+                            "legendPosition": "top",
+                            "encoding": "hex",
+                            "imageFormat": "jpeg"
                         }
                     }
                 }
@@ -110,10 +110,10 @@
                     "queryFile": "./sql/volumes.sql",
                     "type": {
                         "horizontalBar": {
-                            "dataDirection":"vertical",
-                            "columnsAsLabels":true,
-                            "labelFirstColumn":true,
-                            "legendPosition":"top"
+                            "dataDirection": "vertical",
+                            "columnsAsLabels": true,
+                            "labelFirstColumn": true,
+                            "legendPosition": "top"
                         }
                     }
                 }
@@ -124,12 +124,12 @@
                     "queryFile": "./sql/wait-stats-categories.sql",
                     "type": {
                         "doughnut": {
-                            "dataDirection":"vertical",
-                            "columnsAsLabels":true,
-                            "labelFirstColumn":true,
-                            "legendPosition":"none",
-                            "encoding":"hex",
-                            "imageFormat":"jpeg"
+                            "dataDirection": "vertical",
+                            "columnsAsLabels": true,
+                            "labelFirstColumn": true,
+                            "legendPosition": "none",
+                            "encoding": "hex",
+                            "imageFormat": "jpeg"
                         }
                     }
                 }
@@ -154,12 +154,12 @@
                     "queryFile": "./sql/wait-stats-per-task.sql",
                     "type": {
                         "doughnut": {
-                            "dataDirection":"vertical",
-                            "columnsAsLabels":true,
-                            "labelFirstColumn":true,
-                            "legendPosition":"none",
-                            "encoding":"hex",
-                            "imageFormat":"jpeg"
+                            "dataDirection": "vertical",
+                            "columnsAsLabels": true,
+                            "labelFirstColumn": true,
+                            "legendPosition": "none",
+                            "encoding": "hex",
+                            "imageFormat": "jpeg"
                         }
                     }
                 }
@@ -184,13 +184,13 @@
                     "queryFile": "./sql/db-log-file-stats-history.sql",
                     "type": {
                         "line": {
-                          "dataDirection": "vertical",
-                          "columnsAsLabels": true,
-                          "labelFirstColumn": true,
-                          "legendPosition": "top",
-                          "xAxisLabel": "Time",
-                          "yAxisLabel": "",
-                          "dataType": "number"
+                            "dataDirection": "vertical",
+                            "columnsAsLabels": true,
+                            "labelFirstColumn": true,
+                            "legendPosition": "top",
+                            "xAxisLabel": "Time",
+                            "yAxisLabel": "",
+                            "dataType": "number"
                         }
                     }
                 }
@@ -201,13 +201,13 @@
                     "queryFile": "./sql/db-data-file-stats-history.sql",
                     "type": {
                         "line": {
-                          "dataDirection": "vertical",
-                          "columnsAsLabels": true,
-                          "labelFirstColumn": true,
-                          "legendPosition": "top",
-                          "xAxisLabel": "Time",
-                          "yAxisLabel": "",
-                          "dataType": "number"
+                            "dataDirection": "vertical",
+                            "columnsAsLabels": true,
+                            "labelFirstColumn": true,
+                            "legendPosition": "top",
+                            "xAxisLabel": "Time",
+                            "yAxisLabel": "",
+                            "dataType": "number"
                         }
                     }
                 }
@@ -615,12 +615,9 @@
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install && node ./node_modules/azdata/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+        "postinstall": "node ./node_modules/vscode/bin/install && node ./node_modules/azdata/bin/install"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.10.9",
         "azdata": "^1.0.0",
         "typescript": "^2.6.1",
         "vscode": "^1.1.36"

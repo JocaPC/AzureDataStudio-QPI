@@ -1,5 +1,7 @@
 .vscode/**
 .vscode-test/**
+node_modules/mocha
+node_modules/vscode
 out/test/**
 out/**/*.map
 .gitignore
