@@ -1,7 +1,6 @@
 .vscode/**
 .vscode-test/**
-node_modules/mocha
-node_modules/vscode
+node_modules
 out/test/**
 out/**/*.map
 .gitignore
@@ -9,3 +8,4 @@ tsconfig.json
 vsc-extension-quickstart.md
 tslint.json
 src
+*.vsix*
