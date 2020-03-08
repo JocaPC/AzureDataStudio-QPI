@@ -336,8 +336,8 @@
                             "id": "nav-qpi-properties",
                             "title": "Properties",
                             "icon": {
-                                "light": "./src/media/properties.svg",
-                                "dark": "./src/media/properties_inverse.svg"
+                                "light": "./media/properties.svg",
+                                "dark": "./media/properties_inverse.svg"
                             },
                             "container": {
                                 "qpi-properties-container": {}
@@ -347,8 +347,8 @@
                             "id": "nav-qpi-statistics",
                             "title": "File IO",
                             "icon": {
-                                "light": "./src/media/disk.svg",
-                                "dark": "./src/media/disk_inverse.svg"
+                                "light": "./media/disk.svg",
+                                "dark": "./media/disk_inverse.svg"
                             },
                             "container": {
                                 "qpi-statistics-container": {}
@@ -358,8 +358,8 @@
                             "id": "nav-qpi-memory",
                             "title": "Memory",
                             "icon": {
-                                "light": "./src/media/memory.svg",
-                                "dark": "./src/media/memory_inverse.svg"
+                                "light": "./media/memory.svg",
+                                "dark": "./media/memory_inverse.svg"
                             },
                             "container": {
                                 "qpi-memory-container": {}
@@ -369,8 +369,8 @@
                             "id": "nav-qpi-query-statistics",
                             "title": "Query statistics",
                             "icon": {
-                                "light": "./src/media/queries.svg",
-                                "dark": "./src/media/queries_inverse.svg"
+                                "light": "./media/queries.svg",
+                                "dark": "./media/queries_inverse.svg"
                             },
                             "container": {
                                 "qpi-query-statistics-container": {}
