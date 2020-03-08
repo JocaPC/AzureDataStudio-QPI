@@ -11,7 +11,7 @@ async function showScript(fileName, scriptText) {
         editor.edit(edit => {
             edit.insert(new vscode.Position(0, 0), scriptText);
         });
-        vscode.window.showInformationMessage("Execute the script on the target database.");
+        vscode.window.showInformationMessage("Connect to your database and execute this script.");
     } catch (err) {
         vscode.window.showErrorMessage(err);
     }

@@ -149,6 +149,20 @@
                 }
             },
             {
+                "id": "qpi.blocked-queries",
+                "contrib": {
+                    "queryFile": "./sql/queries-blocked.sql",
+                    "type": {
+                        "table": {
+                            "dataDirection": "horizontal",
+                            "columnsAsLabels": false,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top"
+                        }
+                    }
+                }
+            },
+            {
                 "id": "qpi.wait-stats-per-task",
                 "contrib": {
                     "queryFile": "./sql/wait-stats-per-task.sql",
@@ -426,9 +440,9 @@
                             }
                         },
                         {
-                            "name": "File IO statistic",
+                            "name": "File IO statistics",
                             "gridItemConfig": {
-                                "sizex": 4,
+                                "sizex": 3,
                                 "sizey": 1
                             },
                             "widget": {
@@ -443,6 +457,16 @@
                             },
                             "widget": {
                                 "qpi.wait-stats": {}
+                            }
+                        },
+                        {
+                            "name": "Blocked queries",
+                            "gridItemConfig": {
+                                "sizex": 3,
+                                "sizey": 1
+                            },
+                            "widget": {
+                                "qpi.blocked-queries": {}
                             }
                         }
                     ]
@@ -490,7 +514,7 @@
                 "container": {
                     "widgets-container": [
                         {
-                            "name": "File IO statistic",
+                            "name": "File IO statistics(since the last snapshot)",
                             "gridItemConfig": {
                                 "sizex": 4,
                                 "sizey": 1
@@ -500,7 +524,7 @@
                             }
                         },
                         {
-                            "name": "Database Log IO statistic",
+                            "name": "Database Log IO statistics (since the last snapshot)",
                             "gridItemConfig": {
                                 "sizex": 4,
                                 "sizey": 1
@@ -510,7 +534,7 @@
                             }
                         },
                         {
-                            "name": "Database Data IO statistic",
+                            "name": "Database Data IO statistics (since the last snapshot)",
                             "gridItemConfig": {
                                 "sizex": 4,
                                 "sizey": 1

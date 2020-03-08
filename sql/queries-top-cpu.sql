@@ -3,5 +3,6 @@ SELECT TOP 10 query_id,
         [Duration(sec)] = CAST(duration_s AS NUMERIC(8,1)), 
         count_executions
 FROM qpi.db_query_exec_stats_history
-order by cpu_time_ms desc
+WHERE cpu_time_ms > 100 
+ORDER BY cpu_time_ms DESC
 
