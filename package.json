@@ -620,10 +620,7 @@
     "devDependencies": {
         "azdata": "^1.0.0",
         "typescript": "^2.6.1",
-        "vscode": "^1.1.36"
-    },
-    "dependencies": {
-        "request": "^2.88.0",
-        "request-promise-native": "^1.0.8"
+        "vscode": "^1.1.36",
+        "@types/node": "^10.17.17"
     }
 }
