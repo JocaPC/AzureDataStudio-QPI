@@ -75,6 +75,21 @@
                 }
             },
             {
+                "id": "qpi.file-io-history",
+                "contrib": {
+                    "type":{
+                            "line":{
+                                "dataDirection":"vertical",
+                                "columnsAsLabels":true,
+                                "labelFirstColumn":false,
+                                "legendPosition":"top",
+                                "dataType":"number"
+                            }
+                    },
+                    "queryFile":"./sql/file-io-history.sql"
+                 }
+            },
+            {
                 "id": "qpi.memory",
                 "contrib": {
                     "queryFile": "./sql/memory.sql",
@@ -446,7 +461,7 @@
                                 "sizey": 1
                             },
                             "widget": {
-                                "qpi.file-stats": {}
+                                "qpi.file-io-history": {}
                             }
                         },
                         {

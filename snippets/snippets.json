@@ -166,11 +166,35 @@
         "description": "Return query plan wait statistics from the latest Query Store interval."
     },
     "QPI snapshot statistics": {
-        "prefix": "qpi:snapshot stats",
+        "prefix": "qpi:snapshot all stats",
         "body": [
             "-- Take the snapshot (baseline) of the following statistics:",
             "exec qpi.snapshot_perf_counters;",
             "exec qpi.snapshot_wait_stats;",
+            "exec qpi.snapshot_file_stats;"
+        ],
+        "description": "Take a snapshot of file/wait statistics and perf counters"
+    },
+    "QPI snapshot wait stats": {
+        "prefix": "qpi:snapshot wait stats",
+        "body": [
+            "-- Take the snapshot (baseline) of the wait statistics:",
+            "exec qpi.snapshot_wait_stats;"
+        ],
+        "description": "Take a snapshot of wait statistics"
+    },
+    "QPI snapshot perf counters stats": {
+        "prefix": "qpi:snapshot wait stats",
+        "body": [
+            "-- Take the snapshot (baseline) of the perf counters:",
+            "exec qpi.snapshot_perf_counters;",
+        ],
+        "description": "Take a snapshot of wait statistics"
+    },
+    "QPI snapshot file statistics": {
+        "prefix": "qpi:snapshot file stats",
+        "body": [
+            "-- Take the snapshot (baseline) of the file statistics:",
             "exec qpi.snapshot_file_stats;"
         ],
         "description": "Take a snapshot of statistics"
@@ -181,7 +205,7 @@
             "-- Returns IO statistics for all database files:",
             "SELECT * FROM qpi.file_stats;"
         ],
-        "description": "get file IO statistics"
+        "description": "Get file IO statistics"
     },
     "QPI db file statistics": {
         "prefix": "qpi:db file stats",
