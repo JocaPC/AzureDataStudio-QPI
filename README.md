@@ -19,6 +19,8 @@ Find the database that you want to analyze in connections and use **QPI: Install
 
 If you are using Azure SQL Database or SQL Server 2016-2017, find the version of the script in [QPI installation](https://github.com/JocaPC/qpi#installation) section.
 
+![Install QPI](https://raw.githubusercontent.com/JocaPC/AzureDataStudio-QPI/master/images/ads-qpi-install.gif)
+
 After installation, you will get the schema `qpi` in your database will the set of views, functions, and tables needed for performance troubleshooting. If you want to remove your QPI script from the database, right-click and use **QPI: Remove  QPI scripts** option.
 
 ## Troubleshot and analyze database performance
@@ -30,6 +32,8 @@ Select your database and open `QPI` tab. Here you can see a set of reports divid
 - Query statistics
 
 If you see anything strange in the reports select right-upper corner of the report and select **Run Query** option. This option will open the underlying query used for report that you can modify.
+
+![Troubeshoot using QPI](https://raw.githubusercontent.com/JocaPC/AzureDataStudio-QPI/master/images/ads-qpi-troubleshoot.gif)
 
 There is a set of predefined snippets with `qpi:` prefix that will be expanded as useful queries that you can use for analysis.
 
