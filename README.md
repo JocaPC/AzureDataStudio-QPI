@@ -12,7 +12,7 @@ Find **Query Performance Insights** extension in Azure Data studio and install t
 
 ## Install QPI scripts in your database
 
-Database that you analyze must have [Query Performance Insights scripts](https://github.com/JocaPC/qpi) adds to your database.
+Database that you analyze must have [Query Performance Insights scripts](https://github.com/JocaPC/qpi) in your database.
 
 If you are using Azure SQL Managed Instance or SQL server 2019+, you can install the [Query Performance Insights scripts](https://github.com/JocaPC/qpi) directly using the extension. 
 Find the database that you want to analyze in connections and use **QPI: Install latest QPI scripts** option. Run the query that is opened to add QPI objects.
