@@ -1,10 +1,10 @@
 # Azure Data Studio - Query Performance Insights
 
-Query Performance Insights is Azure Data Studio extension that enables you to monitor performance and troubleshoot performance using [Query Performance Insights](https://github.com/JocaPC/qpi) T-SQL library. 
+Query Performance Insights (QPI) is Azure Data Studio extension that enables you to monitor performance and troubleshoot performance issues using [Query Performance Insights](https://github.com/JocaPC/qpi) T-SQL library. This extension works with Azure SQL Managed Instance and the latest version of SQL Server.
 
 [Query Performance Insights  library](https://github.com/JocaPC/qpi) is a collection of useful scripts that enable you find what is happening with your SQL Server 2016+ or Azure SQL Database (Single or Managed Instance). This is a set of helper views, functions, and procedures that wrap Query Store and Dynamic Management Objects.
 
-Query Performance Insights Azure Data Studio extension is a user interface that enables you to easily install [Query Performance Insights  library](https://github.com/JocaPC/qpi) in your database and see the most useful reports without need to write SQL queries.
+QPI Azure Data Studio extension is a user interface that enables you to easily install [Query Performance Insights  library](https://github.com/JocaPC/qpi) in your database and see the most useful reports without need to write SQL queries.
 
 ## Installation
 
@@ -12,10 +12,10 @@ Find **Query Performance Insights** extension in Azure Data studio and install t
 
 ## Install QPI scripts in your database
 
-Database that you analyze must have [Query Performance Insights scripts](https://github.com/JocaPC/qpi) in your database.
+Database that you monitor and troubleshoot must have [Query Performance Insights scripts](https://github.com/JocaPC/qpi).
 
-If you are using Azure SQL Managed Instance or SQL server 2019+, you can install the [Query Performance Insights scripts](https://github.com/JocaPC/qpi) directly using the extension. 
-Find the database that you want to analyze in connections and use **QPI: Install latest QPI scripts** option. Run the query that is opened to add QPI objects.
+If you are using Azure SQL Managed Instance or SQL Server 2019+, you can install the [Query Performance Insights scripts](https://github.com/JocaPC/qpi) directly using the extension. 
+Find the database that you want to monitor in connections and use **QPI: Install latest QPI scripts** option. Run the query that is opened to add QPI objects in your database.
 
 If you are using Azure SQL Database or SQL Server 2016-2017, find the version of the script in [QPI installation](https://github.com/JocaPC/qpi#installation) section.
 
@@ -44,6 +44,6 @@ Some metrics in database are cumulative and you need to take periodic snapshots 
 - Wait statistics
 - Performance counters
 
-You can open new query and use `qpi:snapshot` snippet to take a snapshot of all statistics mentioned above. You can also use `qpi:snapshot file stats   , `qpi:snapshot wait stats`, and `qpi:snapshot perf counters` to take the snapshot of specific statistic.
+You can open new query and use `qpi:snapshot` snippet to take a snapshot of all statistics mentioned above. You can also use `qpi:snapshot file stats`, `qpi:snapshot wait stats`, and `qpi:snapshot perf counters` to take the snapshot of specific statistic.
 
 You can also create SQL Agent job that will periodically take snapshots of statistics. Right-click on the instance and select **QPI: Install SQL Agent job that will periodically take the snapshots of statistics**. In the query window set the name of database where statistic snapshots should be taken. 
