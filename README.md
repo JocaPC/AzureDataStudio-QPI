@@ -33,6 +33,8 @@ Select your database and open `QPI` tab. Here you can see a set of reports divid
 
 If you see anything strange in the reports select right-upper corner of the report and select **Run Query** option. This option will open the underlying query used for report that you can modify.
 
+![Troubeshoot using QPI](https://raw.githubusercontent.com/JocaPC/AzureDataStudio-QPI/master/images/ads-qpi-troubleshoot.gif)
+
 There is a set of predefined snippets with `qpi:` prefix that will be expanded as usefull queries that you can use for analysis.
 
 ## Snapshots
