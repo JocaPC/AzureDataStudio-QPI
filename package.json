@@ -77,17 +77,17 @@
             {
                 "id": "qpi.file-io-history",
                 "contrib": {
-                    "type":{
-                            "line":{
-                                "dataDirection":"vertical",
-                                "columnsAsLabels":true,
-                                "labelFirstColumn":false,
-                                "legendPosition":"top",
-                                "dataType":"number"
-                            }
+                    "type": {
+                        "line": {
+                            "dataDirection": "vertical",
+                            "columnsAsLabels": true,
+                            "labelFirstColumn": false,
+                            "legendPosition": "top",
+                            "dataType": "number"
+                        }
                     },
-                    "queryFile":"./sql/file-io-history.sql"
-                 }
+                    "queryFile": "./sql/file-io-history.sql"
+                }
             },
             {
                 "id": "qpi.memory",
@@ -657,9 +657,9 @@
         "postinstall": "node ./node_modules/vscode/bin/install && node ./node_modules/azdata/bin/install"
     },
     "devDependencies": {
+        "@types/node": "^10.17.19",
         "azdata": "^1.0.0",
         "typescript": "^2.6.1",
-        "vscode": "^1.1.36",
-        "@types/node": "^10.17.17"
+        "vscode": "^1.1.36"
     }
 }
