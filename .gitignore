@@ -4,4 +4,4 @@ node_modules
 *.vsix
 secrets.txt
 apiconfig.json
-package-lock.json
+*lock.json
