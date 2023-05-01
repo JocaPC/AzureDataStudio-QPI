@@ -47,3 +47,7 @@ Some metrics in database are cumulative and you need to take periodic snapshots 
 You can open new query and use `qpi:snapshot` snippet to take a snapshot of all statistics mentioned above. You can also use `qpi:snapshot file stats`, `qpi:snapshot wait stats`, and `qpi:snapshot perf counters` to take the snapshot of specific statistic.
 
 You can also create SQL Agent job that will periodically take snapshots of statistics. Right-click on the instance and select **QPI: Install SQL Agent job that will periodically take the snapshots of statistics**. In the query window set the name of database where statistic snapshots should be taken. 
+
+## License
+
+This extension is licensed under the [MIT License](https://github.com/JocaPC/AzureDataStudio-QPI/blob/master/LICENSE).
